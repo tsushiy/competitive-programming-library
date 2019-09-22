@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/tsushiy/kyopro-library.svg?branch=master)](https://travis-ci.org/tsushiy/kyopro-library)

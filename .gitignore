@@ -1,2 +1,5 @@
 .vscode
 out
+.input
+.output
+test/*
