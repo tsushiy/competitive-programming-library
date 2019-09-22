@@ -1,4 +1,4 @@
-#include "../util/template.cpp"
+#include "../util/template.hpp"
 #include "runtime_mod_comb.cpp"
 
 int main() {

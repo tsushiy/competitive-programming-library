@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A&lang=jp"
 
-#include "../util/template.cpp"
+#include "../util/template.hpp"
 #include "segment_tree.cpp"
 
 int main() {
