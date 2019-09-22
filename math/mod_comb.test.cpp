@@ -1,5 +1,5 @@
 #include "../util/template.hpp"
-#include "mod_comb.cpp"
+#include "mod_comb.hpp"
 
 int main() {
   constexpr unsigned int N = 200010;

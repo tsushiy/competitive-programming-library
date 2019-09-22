@@ -1,5 +1,5 @@
 #include "../util/template.hpp"
-#include "runtime_mod_comb.cpp"
+#include "runtime_mod_comb.hpp"
 
 int main() {
   unsigned int N = 200010;

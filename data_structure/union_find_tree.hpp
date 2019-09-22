@@ -1,5 +1,7 @@
-#include <vector>
-
+/**
+ * @brief UnionFind Tree
+ * @note O(α(N))
+ */
 struct UnionFind{
 private:
   std::vector<int> par, rank, sizes;

@@ -1,6 +1,8 @@
-#include <vector>
-#include <string>
-
+/**
+ * @brief RollingHash (Rabin-Karp)
+ * @note construct : O(N)
+ * @note get hash : O(1)
+ */
 struct RollingHash {
   static constexpr int ms = 2;
   const int base[ms] = {1007, 2009};

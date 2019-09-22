@@ -1,7 +1,7 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=ja"
 
 #include "../util/template.hpp"
-#include "binary_indexed_tree.cpp"
+#include "binary_indexed_tree.hpp"
 
 int main() {
   int n, q;

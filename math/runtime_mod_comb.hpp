@@ -1,5 +1,8 @@
-#include <vector>
-
+/**
+ * @brief Runtime ModCombination
+ * @note construct table : O(N)
+ * @note CalcBinomial : O(1)
+ */
 struct RuntimeModComb {
 private:
   unsigned int N;

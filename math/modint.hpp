@@ -1,6 +1,7 @@
-#include <iostream>
-
-
+/**
+ * @brief constexpr Modint data structure
+ * @note support + - * / inv pow == != iostream
+ */
 template<long long MOD = 1000000007>
 struct Mint {
 private:

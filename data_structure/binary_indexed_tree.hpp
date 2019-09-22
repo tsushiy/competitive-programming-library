@@ -1,3 +1,7 @@
+/**
+ * @brief BinaryIndexedTree
+ * @note add|sum : O(logN)
+ */
 template<typename T>
 struct BinaryIndexedTree {
 private:
@@ -6,7 +10,7 @@ private:
 public:
   BinaryIndexedTree(int n_) { node.resize(n_, 0); }
   void add(int k, T x) {
-    for (int j = k + 1; j <= node.size(); j += j & -j) node[j-1] += x;
+    for (int j = k + 1; j <= (int)node.size(); j += j & -j) node[j-1] += x;
   }
   T sum(int k) { // [0, k)
     T acc = 0;

@@ -1,3 +1,8 @@
+/**
+ * @brief SegmentTree
+ * @note construct : O(N)
+ * @note query : O(logN)
+ */
 template<typename T, typename Monoid>
 struct SegmentTree {
 private:

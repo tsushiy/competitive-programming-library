@@ -1,3 +1,8 @@
+/**
+ * @brief constexpr ModCombination
+ * @note construct table : O(N)
+ * @note CalcBinomial : O(1)
+ */
 template<unsigned int N = 200010, long long MOD = 1000000007>
 struct ModComb {
   long long fac[N+1];

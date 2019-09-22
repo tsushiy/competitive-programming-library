@@ -1,7 +1,7 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A&lang=jp"
 
 #include "../util/template.hpp"
-#include "segment_tree.cpp"
+#include "segment_tree.hpp"
 
 int main() {
   int n, q;
