@@ -1,8 +1,5 @@
+#include "../util/template.cpp"
 #include "runtime_mod_comb.cpp"
-
-#include <cassert>
-#include <iostream>
-using namespace std;
 
 int main() {
   unsigned int N = 200010;

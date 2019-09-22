@@ -1,7 +1,5 @@
+#include "../util/template.cpp"
 #include "mod_comb.cpp"
-
-#include <cassert>
-using namespace std;
 
 int main() {
   constexpr unsigned int N = 200010;

@@ -6,7 +6,7 @@ struct ModComb {
 
   constexpr ModComb() noexcept : fac(), inv(), ifac() {
     fac[0] = fac[1] = inv[1] = ifac[1] = 1;
-    for (int i = 2; i <= N; ++i) {
+    for (size_t i = 2; i <= N; ++i) {
       fac[i] = fac[i-1] * i % MOD;
       inv[i] = MOD - inv[MOD%i] * (MOD / i) % MOD;
       ifac[i] = ifac[i-1] * inv[i] % MOD;
