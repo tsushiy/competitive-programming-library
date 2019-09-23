@@ -17,7 +17,7 @@
 
 ## Math
 
-* [Sieve of Eratosthenes](math/eratosthenes.hpp)
+* [Prime](math/prime.hpp)
 * [GCD](math/gcd.hpp)
 * [Extended Euclidean Algorithm (ExtGCD)](math/extgcd.hpp)
 * [Modint](math/modint.hpp)

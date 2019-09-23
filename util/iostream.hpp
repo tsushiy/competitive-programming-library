@@ -58,5 +58,5 @@ ostream &operator<<(ostream &os, const map<T, U> &ma) {
 
 inline void print(void) { cout<<'\n'; }
 template<class T> inline void print(const T &x) { cout<<x<<'\n'; }
-template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<", "; print(y...); }
+template<class T, class... U> inline void print(const T &x, const U&... y) { cout<<x<<" "; print(y...); }
 #define dump(...) cout<<#__VA_ARGS__<<": [L_"<<__LINE__<<"]"<<'\n'; print(__VA_ARGS__);cout<<'\n';

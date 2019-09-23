@@ -1,0 +1,26 @@
+/**
+ * @brief 重み付き区間スケジューリング問題
+ * @see http://ncastar.hatenablog.com/entry/20141004/1412435099
+ */
+struct Interval {
+  int s, t, weight;
+  Interval(int s, int t, int weight) : s(s), t(t), weight(weight) {}
+  bool operator<(const Interval & rhs) const {
+    if (t != rhs.t) return t < rhs.t;
+    if (s != rhs.s) return s < rhs.s;
+    return weight < rhs.weight;
+  }
+};
+
+long long scheduling(vector<Interval> &intervals) {
+  sort(intervals.begin(), intervals.end());
+  vector<long long> dp(intervals.size(), 0);
+  vector<int> buf;
+  for (int i = 0; i < (int)intervals.size(); ++i) {
+    int prev = lower_bound(buf.begin(), buf.end(), intervals[i].s) - buf.begin();
+    --prev;
+    dp[i] = max((i ? dp[i-1] : 0), intervals[i].weight + ((prev == -1) ? 0 : dp[prev]));
+    buf.push_back(intervals[i].t);
+  }
+  return dp[intervals.size()-1];
+}
