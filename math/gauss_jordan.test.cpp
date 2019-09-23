@@ -3,7 +3,7 @@
 #include "../util/template.hpp"
 #include "modint.hpp"
 #include "matrix.hpp"
-#include "gause_jordan.hpp"
+#include "gauss_jordan.hpp"
 
 int main() {
   constexpr double EPS = 1e-5;

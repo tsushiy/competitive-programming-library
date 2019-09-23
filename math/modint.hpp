@@ -41,8 +41,8 @@ public:
   }
   constexpr bool operator==(const Mint& rhs) const noexcept { return val == rhs.val; }
   constexpr bool operator!=(const Mint& rhs) const noexcept { return val != rhs.val; }
-  friend std::ostream &operator<<(std::ostream &os, const Mint<MOD> &x) { return os << x.val; }
-  friend std::istream &operator>>(std::istream &is, Mint<MOD> &x) {
+  friend ostream &operator<<(ostream &os, const Mint<MOD> &x) { return os << x.val; }
+  friend istream &operator>>(istream &is, Mint<MOD> &x) {
     long long t;
     is >> t;
     x.val = t % MOD;

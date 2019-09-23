@@ -9,9 +9,9 @@ private:
   long long MOD;
 
 public:
-  std::vector<long long> fac;
-  std::vector<long long> inv;
-  std::vector<long long> ifac;
+  vector<long long> fac;
+  vector<long long> inv;
+  vector<long long> ifac;
 
   RuntimeModComb(unsigned int N, long long MOD) : N(N), MOD(MOD), fac(), inv(), ifac() {
     fac.resize(N), inv.resize(N), ifac.resize(N);

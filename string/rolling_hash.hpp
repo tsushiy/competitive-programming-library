@@ -8,9 +8,9 @@ struct RollingHash {
   const int base[ms] = {1007, 2009};
   const int mod[ms] = {1000000007, 1000000009};
 
-  std::vector<long long> hash[ms], power[ms];
+  vector<long long> hash[ms], power[ms];
 
-  RollingHash(const std::string &s) {
+  RollingHash(const string &s) {
     int n = s.size();
     for (int i = 0; i < ms; ++i) {
       hash[i].assign(n+1, 0);
@@ -22,8 +22,8 @@ struct RollingHash {
     }
   }
 
-  std::vector<long long> get(int l, int r) const {
-    std::vector<long long> ret(ms);
+  vector<long long> get(int l, int r) const {
+    vector<long long> ret(ms);
     for (int i = 0; i < ms; ++i) {
       long long res = hash[i][r] - hash[i][l] * power[i][r-l] % mod[i];
       if (res < 0) res += mod[i];

@@ -4,7 +4,7 @@
  */
 struct UnionFind{
 private:
-  std::vector<int> par, rank, sizes;
+  vector<int> par, rank, sizes;
 public:
   UnionFind(int n) : par(n, -1), rank(n, 0), sizes(n, 1){}
   int find(int x) { return (par[x] < 0) ? x : (par[x] = find(par[x])); }

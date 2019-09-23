@@ -7,10 +7,10 @@ template<typename T, typename Monoid>
 struct SegmentTree {
 private:
   int n;
-  std::vector<T> node;
+  vector<T> node;
 
 public:
-  constexpr SegmentTree(int n_) {
+  constexpr SegmentTree(int n_) : node() {
     n = 1;
     while (n < n_) n <<= 1;
     node.resize(2*n-1, Monoid::unit());
@@ -43,12 +43,12 @@ struct PlusMonoid {
 
 template<typename T>
 struct MaxMonoid {
-  static constexpr T unit() { return std::numeric_limits<T>::min(); }
-  static constexpr T operate(T a, T b) { return std::max(a, b); }
+  static constexpr T unit() { return numeric_limits<T>::min(); }
+  static constexpr T operate(T a, T b) { return max(a, b); }
 };
 
 template<typename T>
 struct MinMonoid {
-  static constexpr T unit() { return std::numeric_limits<T>::max(); }
-  static constexpr T operate(T a, T b) { return std::min(a, b); }
+  static constexpr T unit() { return numeric_limits<T>::max(); }
+  static constexpr T operate(T a, T b) { return min(a, b); }
 };

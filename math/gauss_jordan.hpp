@@ -1,7 +1,7 @@
 /**
- * @brief Gauss-Jordan Elimination
+ * @brief Gauss-Jordan Elimination (Real Number)
  * @see http://drken1215.hatenablog.com/entry/2019/03/20/202800
- * @note Support Real number, Do Not use Integer type.
+ * @note Do Not use Integer type.
  * @note かなり誤差が出る
  */
 template<typename T>
@@ -52,9 +52,8 @@ int linear_equation(Matrix<T> A, vector<T> b, vector<T> &res) {
 }
 
 /**
- * @brief Gauss-Jordan Elimination
+ * @brief Gauss-Jordan Elimination (Modint)
  * @see http://drken1215.hatenablog.com/entry/2019/03/20/202800
- * @note Support Modint.
  */
 template<long long MOD>
 int gauss_jordan(Matrix<Mint<MOD>> &A) {
