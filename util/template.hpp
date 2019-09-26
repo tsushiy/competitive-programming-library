@@ -9,17 +9,11 @@ constexpr int INF = 1LL << 30;
 constexpr long long LLINF = 1LL << 60;
 constexpr double EPS = 1e-9;
 
-struct custom_tf : numpunct<char> {
-  string do_truename() const { return "Yes"; }
-  string do_falsename() const { return "No"; }
-};
-
 struct Initializer {
   Initializer() {
     cin.tie(0);
     ios::sync_with_stdio(0);
     cout << fixed << setprecision(15) << boolalpha;
-    cout.imbue(locale(cout.getloc(), new custom_tf));
   }
 } initializer;
 
