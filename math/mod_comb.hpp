@@ -10,7 +10,7 @@ struct ModComb {
   long long ifac[N+1];
 
   constexpr ModComb() noexcept : fac(), inv(), ifac() {
-    fac[0] = fac[1] = inv[1] = ifac[1] = 1;
+    fac[0] = fac[1] = inv[1] = ifac[0] = ifac[1] = 1;
     for (size_t i = 2; i <= N; ++i) {
       fac[i] = fac[i-1] * i % MOD;
       inv[i] = MOD - inv[MOD%i] * (MOD / i) % MOD;

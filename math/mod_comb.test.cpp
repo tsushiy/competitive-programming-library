@@ -6,6 +6,7 @@ int main() {
   constexpr long long MOD = 1000000007;
   constexpr ModComb<N, MOD> mc;
 
+  static_assert(mc.comb(10, 10) == 1, "");
   static_assert(mc.comb(100, 10) == 309335270, "");
 
   return 0;

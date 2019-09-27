@@ -15,7 +15,7 @@ public:
 
   RuntimeModComb(unsigned int N, long long MOD) : N(N), MOD(MOD), fac(), inv(), ifac() {
     fac.resize(N), inv.resize(N), ifac.resize(N);
-    fac[0] = fac[1] = inv[1] = ifac[1] = 1;
+    fac[0] = fac[1] = inv[1] = ifac[0] = ifac[1] = 1;
     for (size_t i = 2; i <= N; ++i) {
       fac[i] = fac[i-1] * i % MOD;
       inv[i] = MOD - inv[MOD%i] * (MOD / i) % MOD;

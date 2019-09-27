@@ -6,6 +6,7 @@ int main() {
   long long MOD = 1000000007;
   RuntimeModComb mc(N, MOD);
 
+  assert(mc.comb(10, 10) == 1);
   assert(mc.comb(100, 10) == 309335270);
 
   return 0;
