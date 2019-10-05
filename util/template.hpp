@@ -6,7 +6,7 @@ using namespace std;
 
 constexpr int MOD = 1000000007;
 constexpr int INF = 1LL << 30;
-constexpr long long LLINF = 1LL << 60;
+constexpr long long LLINF = 1LL << 62;
 constexpr double EPS = 1e-9;
 
 struct Initializer {
