@@ -14,7 +14,7 @@ int main() {
     g[s].emplace_back(t, d);
   }
   auto dists = bellman_ford(g, r);
-  if (dists[0] == numeric_limits<long long>::min()) {
+  rep(i, v) if (dists[i] == numeric_limits<long long>::min()) {
     print("NEGATIVE CYCLE");
     return 0;
   }
