@@ -38,6 +38,28 @@ ostream &operator<<(ostream &os, const pair<T, U> &pa) {
   return os << "(" << pa.first << ", " << pa.second << ")";
 }
 
+template<typename Tuple, size_t N>
+struct TuplePrinter {
+  static void print(const Tuple &t) {
+    TuplePrinter<Tuple, N-1>::print(t);
+    cout << ", " << get<N-1>(t);
+  }
+};
+
+template<typename Tuple>
+struct TuplePrinter<Tuple, 1> {
+  static void print(const Tuple &t) {
+    cout << get<0>(t);
+  }
+};
+
+template<typename... T>
+ostream &operator<<(ostream &os, const tuple<T...> &tup) {
+  os << "(";
+  TuplePrinter<decltype(tup), sizeof...(T)>::print(tup);
+  return os << ")";
+}
+
 template<typename T>
 ostream &operator<<(ostream &os, const set<T> &se) {
   os << "{";
