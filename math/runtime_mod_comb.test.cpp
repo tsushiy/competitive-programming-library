@@ -1,3 +1,4 @@
+#define IGNORE
 #include "../util/template.hpp"
 #include "runtime_mod_comb.hpp"
 

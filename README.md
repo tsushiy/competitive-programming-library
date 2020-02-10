@@ -1,6 +1,6 @@
 # Competitive Programming Library
 
-[![Build Status](https://travis-ci.org/tsushiy/kyopro-library.svg?branch=master)](https://travis-ci.org/tsushiy/kyopro-library)
+[![Actions Status](https://github.com/tsushiy/kyopro-library/workflows/verify/badge.svg)](https://github.com/tsushiy/kyopro-library/actions)
 
 ## Data Structure
 
