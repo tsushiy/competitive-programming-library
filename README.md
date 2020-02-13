@@ -28,7 +28,7 @@
 
 ## String
 
-* [RollinHash](string/rolling_hash.hpp)
+* [RollingHash](string/rolling_hash.hpp)
 
 ## Util
 
