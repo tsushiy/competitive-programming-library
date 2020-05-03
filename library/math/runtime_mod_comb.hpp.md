@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: Runtime ModCombination <small>(math/runtime_mod_comb.hpp)</small>
+# :heavy_check_mark: Runtime ModCombination <small>(math/runtime_mod_comb.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -34,6 +34,11 @@ layout: default
     - Last commit date: 2019-09-27 22:58:44+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/math/runtime_mod_comb.test.cpp.html">math/runtime_mod_comb.test.cpp</a>
 
 
 ## Code

@@ -34,7 +34,6 @@ layout: default
     - Last commit date: 2019-09-23 14:42:48+09:00
 
 
-* Gauss-Jordan Elimination (Modint)
 * see: <a href="http://drken1215.hatenablog.com/entry/2019/03/20/202800">http://drken1215.hatenablog.com/entry/2019/03/20/202800</a>
 * see: <a href="http://drken1215.hatenablog.com/entry/2019/03/20/202800">http://drken1215.hatenablog.com/entry/2019/03/20/202800</a>
 

@@ -25,21 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/dijkstra.test.cpp
+# :heavy_check_mark: math/modint.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/dijkstra.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-10-12 15:20:31+09:00
+* category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
+* <a href="{{ site.github.repository_url }}/blob/master/math/modint.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-02-10 02:46:44+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/graph/dijkstra.hpp.html">Dijkstra <small>(graph/dijkstra.hpp)</small></a>
+* :heavy_check_mark: <a href="../../library/math/modint.hpp.html">constexpr Modint data structure <small>(math/modint.hpp)</small></a>
 * :heavy_check_mark: <a href="../../library/util/template.hpp.html">util/template.hpp</a>
 
 
@@ -48,26 +47,29 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja"
-
+#define IGNORE
 #include "../util/template.hpp"
-#include "dijkstra.hpp"
+#include "modint.hpp"
 
 int main() {
-  int v, e, r;
-  cin>>v>>e>>r;
-  vector<vector<pair<int, long long>>> g(v);
-  rep(i, e) {
-    int s, t;
-    long long d;
-    cin>>s>>t>>d;
-    g[s].emplace_back(t, d);
-  }
-  auto dists = dijkstra(g, r);
-  rep(i, v) {
-    if (dists[i] == numeric_limits<long long>::max()) print("INF");
-    else print(dists[i]);
-  }
+  constexpr long long MOD = 1000000007;
+
+  static_assert(Mint<MOD>(2) == Mint<MOD>(2), "");
+  static_assert(Mint<MOD>(2) != Mint<MOD>(3), "");
+
+  static_assert(Mint<MOD>(-2) == Mint<MOD>(MOD-2), "");
+  static_assert(Mint<MOD>(100*MOD + 2) == Mint<MOD>(2), "");
+
+  static_assert(Mint<MOD>(2)+Mint<MOD>(3) == Mint<MOD>(5), "");
+  static_assert(Mint<MOD>(2)-Mint<MOD>(5) == Mint<MOD>(MOD-3), "");
+  static_assert(Mint<MOD>(7)*Mint<MOD>(8) == Mint<MOD>(56), "");
+  static_assert(Mint<MOD>(16)/Mint<MOD>(2) == Mint<MOD>(8), "");
+
+  static_assert(Mint<MOD>(2).pow(4) == Mint<MOD>(16), "");
+  static_assert(Mint<MOD>(1).inv() * 1 == 1, "");
+  static_assert(Mint<MOD>(7).inv() * 7 == 1, "");
+
+  return 0;
 }
 ```
 {% endraw %}
@@ -75,9 +77,8 @@ int main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "graph/dijkstra.test.cpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja"
-
+#line 1 "math/modint.test.cpp"
+#define IGNORE
 #line 1 "util/template.hpp"
 #include <bits/stdc++.h>
 using namespace std;
@@ -168,50 +169,79 @@ template<class T, class... U> inline void print(const T &x, const U&... y) { cou
 
 template<class T, class U>inline bool chmax(T &a, const U &b) { if(a<b){ a=b; return 1; } return 0; }
 template<class T, class U>inline bool chmin(T &a, const U &b) { if(b<a){ a=b; return 1; } return 0; }
-#line 1 "graph/dijkstra.hpp"
+#line 1 "math/modint.hpp"
 /**
- * @brief Dijkstra
- * @note O((E+V) log V)
+ * @brief constexpr Modint data structure
+ * @note support + - * / inv pow == != iostream
  */
-template<typename T>
-vector<T> dijkstra(const vector<vector<pair<int, T>>> &graph, int root) {
-  using P = pair<T, int>;
-  vector<T> dists(graph.size(), numeric_limits<T>::max());
-  priority_queue<P, vector<P>, greater<P>> que;
-  dists[root] = 0;
-  que.emplace(dists[root], root);
-  while (!que.empty()) {
-    T d; int cur;
-    tie(d, cur) = que.top(); que.pop();
-    if (dists[cur] < d) continue;
-    for (auto e : graph[cur]) {
-      int nx; T cost;
-      tie(nx, cost) = e;
-      if (dists[nx] > dists[cur] + cost) {
-        dists[nx] = dists[cur] + cost;
-        que.emplace(dists[nx], nx);
-      }
-    }
+template<long long MOD = 1000000007>
+struct Mint {
+private:
+  long long val;
+
+public:
+  constexpr Mint(const long long x = 0) noexcept : val(x < 0 ? x % MOD + MOD : x >= MOD ? x % MOD : x) {}
+  constexpr Mint &operator+=(const Mint rhs) noexcept {
+    if ((val += rhs.val) >= MOD) val -= MOD;
+    return *this;
   }
-  return dists;
-}
-#line 5 "graph/dijkstra.test.cpp"
+  constexpr Mint &operator-=(const Mint rhs) noexcept {
+    if ((val -= rhs.val) < 0) val += MOD;
+    return *this;
+  }
+  constexpr Mint &operator*=(const Mint rhs) noexcept {
+    val = val * rhs.val % MOD;
+    return *this;
+  }
+  constexpr Mint &operator/=(Mint rhs) noexcept {
+    val = val * rhs.inv().val % MOD;
+    return *this;
+  }
+  constexpr Mint operator+(const Mint& rhs) const noexcept { return Mint(*this) += rhs; }
+  constexpr Mint operator-(const Mint& rhs) const noexcept { return Mint(*this) -= rhs; }
+  constexpr Mint operator*(const Mint& rhs) const noexcept { return Mint(*this) *= rhs; }
+  constexpr Mint operator/(const Mint& rhs) const noexcept { return Mint(*this) /= rhs; }
+  constexpr Mint inv() const noexcept { return pow(MOD-2); }
+  constexpr Mint pow(long long n) const noexcept {
+    Mint ret(1), mul(val);
+    while (n) {
+      if (n % 2) ret *= mul;
+      mul *= mul;
+      n >>= 1;
+    }
+    return ret;
+  }
+  constexpr bool operator==(const Mint& rhs) const noexcept { return val == rhs.val; }
+  constexpr bool operator!=(const Mint& rhs) const noexcept { return val != rhs.val; }
+  friend ostream &operator<<(ostream &os, const Mint<MOD> &x) { return os << x.val; }
+  friend istream &operator>>(istream &is, Mint<MOD> &x) {
+    long long t;
+    is >> t;
+    x.val = t % MOD;
+    return is;
+  }
+};
+#line 4 "math/modint.test.cpp"
 
 int main() {
-  int v, e, r;
-  cin>>v>>e>>r;
-  vector<vector<pair<int, long long>>> g(v);
-  rep(i, e) {
-    int s, t;
-    long long d;
-    cin>>s>>t>>d;
-    g[s].emplace_back(t, d);
-  }
-  auto dists = dijkstra(g, r);
-  rep(i, v) {
-    if (dists[i] == numeric_limits<long long>::max()) print("INF");
-    else print(dists[i]);
-  }
+  constexpr long long MOD = 1000000007;
+
+  static_assert(Mint<MOD>(2) == Mint<MOD>(2), "");
+  static_assert(Mint<MOD>(2) != Mint<MOD>(3), "");
+
+  static_assert(Mint<MOD>(-2) == Mint<MOD>(MOD-2), "");
+  static_assert(Mint<MOD>(100*MOD + 2) == Mint<MOD>(2), "");
+
+  static_assert(Mint<MOD>(2)+Mint<MOD>(3) == Mint<MOD>(5), "");
+  static_assert(Mint<MOD>(2)-Mint<MOD>(5) == Mint<MOD>(MOD-3), "");
+  static_assert(Mint<MOD>(7)*Mint<MOD>(8) == Mint<MOD>(56), "");
+  static_assert(Mint<MOD>(16)/Mint<MOD>(2) == Mint<MOD>(8), "");
+
+  static_assert(Mint<MOD>(2).pow(4) == Mint<MOD>(16), "");
+  static_assert(Mint<MOD>(1).inv() * 1 == 1, "");
+  static_assert(Mint<MOD>(7).inv() * 7 == 1, "");
+
+  return 0;
 }
 
 ```

@@ -25,21 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/dijkstra.test.cpp
+# :heavy_check_mark: math/mod_comb.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/dijkstra.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-10-12 15:20:31+09:00
+* category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
+* <a href="{{ site.github.repository_url }}/blob/master/math/mod_comb.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-02-10 02:46:44+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/graph/dijkstra.hpp.html">Dijkstra <small>(graph/dijkstra.hpp)</small></a>
+* :heavy_check_mark: <a href="../../library/math/mod_comb.hpp.html">constexpr ModCombination <small>(math/mod_comb.hpp)</small></a>
 * :heavy_check_mark: <a href="../../library/util/template.hpp.html">util/template.hpp</a>
 
 
@@ -48,26 +47,19 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja"
-
+#define IGNORE
 #include "../util/template.hpp"
-#include "dijkstra.hpp"
+#include "mod_comb.hpp"
 
 int main() {
-  int v, e, r;
-  cin>>v>>e>>r;
-  vector<vector<pair<int, long long>>> g(v);
-  rep(i, e) {
-    int s, t;
-    long long d;
-    cin>>s>>t>>d;
-    g[s].emplace_back(t, d);
-  }
-  auto dists = dijkstra(g, r);
-  rep(i, v) {
-    if (dists[i] == numeric_limits<long long>::max()) print("INF");
-    else print(dists[i]);
-  }
+  constexpr unsigned int N = 200010;
+  constexpr long long MOD = 1000000007;
+  constexpr ModComb<N, MOD> mc;
+
+  static_assert(mc.comb(10, 10) == 1, "");
+  static_assert(mc.comb(100, 10) == 309335270, "");
+
+  return 0;
 }
 ```
 {% endraw %}
@@ -75,9 +67,8 @@ int main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "graph/dijkstra.test.cpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja"
-
+#line 1 "math/mod_comb.test.cpp"
+#define IGNORE
 #line 1 "util/template.hpp"
 #include <bits/stdc++.h>
 using namespace std;
@@ -168,50 +159,42 @@ template<class T, class... U> inline void print(const T &x, const U&... y) { cou
 
 template<class T, class U>inline bool chmax(T &a, const U &b) { if(a<b){ a=b; return 1; } return 0; }
 template<class T, class U>inline bool chmin(T &a, const U &b) { if(b<a){ a=b; return 1; } return 0; }
-#line 1 "graph/dijkstra.hpp"
+#line 1 "math/mod_comb.hpp"
 /**
- * @brief Dijkstra
- * @note O((E+V) log V)
+ * @brief constexpr ModCombination
+ * @note construct table : O(N)
+ * @note CalcBinomial : O(1)
  */
-template<typename T>
-vector<T> dijkstra(const vector<vector<pair<int, T>>> &graph, int root) {
-  using P = pair<T, int>;
-  vector<T> dists(graph.size(), numeric_limits<T>::max());
-  priority_queue<P, vector<P>, greater<P>> que;
-  dists[root] = 0;
-  que.emplace(dists[root], root);
-  while (!que.empty()) {
-    T d; int cur;
-    tie(d, cur) = que.top(); que.pop();
-    if (dists[cur] < d) continue;
-    for (auto e : graph[cur]) {
-      int nx; T cost;
-      tie(nx, cost) = e;
-      if (dists[nx] > dists[cur] + cost) {
-        dists[nx] = dists[cur] + cost;
-        que.emplace(dists[nx], nx);
-      }
+template<unsigned int N = 200010, long long MOD = 1000000007>
+struct ModComb {
+  long long fac[N+1];
+  long long inv[N+1];
+  long long ifac[N+1];
+
+  constexpr ModComb() noexcept : fac(), inv(), ifac() {
+    fac[0] = fac[1] = inv[1] = ifac[0] = ifac[1] = 1;
+    for (size_t i = 2; i <= N; ++i) {
+      fac[i] = fac[i-1] * i % MOD;
+      inv[i] = MOD - inv[MOD%i] * (MOD / i) % MOD;
+      ifac[i] = ifac[i-1] * inv[i] % MOD;
     }
   }
-  return dists;
-}
-#line 5 "graph/dijkstra.test.cpp"
+  constexpr long long comb(unsigned int n, unsigned int k) const noexcept {
+    if (n < 0 || k < 0 || k > n) return 0;
+    return (fac[n] * ifac[k] % MOD) * ifac[n-k] % MOD;
+  }
+};
+#line 4 "math/mod_comb.test.cpp"
 
 int main() {
-  int v, e, r;
-  cin>>v>>e>>r;
-  vector<vector<pair<int, long long>>> g(v);
-  rep(i, e) {
-    int s, t;
-    long long d;
-    cin>>s>>t>>d;
-    g[s].emplace_back(t, d);
-  }
-  auto dists = dijkstra(g, r);
-  rep(i, v) {
-    if (dists[i] == numeric_limits<long long>::max()) print("INF");
-    else print(dists[i]);
-  }
+  constexpr unsigned int N = 200010;
+  constexpr long long MOD = 1000000007;
+  constexpr ModComb<N, MOD> mc;
+
+  static_assert(mc.comb(10, 10) == 1, "");
+  static_assert(mc.comb(100, 10) == 309335270, "");
+
+  return 0;
 }
 
 ```

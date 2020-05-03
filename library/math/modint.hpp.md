@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/math/gauss_jordan.test.cpp.html">math/gauss_jordan.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/math/modint.test.cpp.html">math/modint.test.cpp</a>
 
 
 ## Code

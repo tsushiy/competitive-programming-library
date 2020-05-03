@@ -25,21 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/dijkstra.test.cpp
+# :heavy_check_mark: math/prime.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/dijkstra.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2019-10-12 15:20:31+09:00
+* category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
+* <a href="{{ site.github.repository_url }}/blob/master/math/prime.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-02-10 02:46:44+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/graph/dijkstra.hpp.html">Dijkstra <small>(graph/dijkstra.hpp)</small></a>
+* :heavy_check_mark: <a href="../../library/math/prime.hpp.html">Sieve of Eratosthenes <small>(math/prime.hpp)</small></a>
 * :heavy_check_mark: <a href="../../library/util/template.hpp.html">util/template.hpp</a>
 
 
@@ -48,26 +47,27 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja"
-
+#define IGNORE
 #include "../util/template.hpp"
-#include "dijkstra.hpp"
+#include "prime.hpp"
 
 int main() {
-  int v, e, r;
-  cin>>v>>e>>r;
-  vector<vector<pair<int, long long>>> g(v);
-  rep(i, e) {
-    int s, t;
-    long long d;
-    cin>>s>>t>>d;
-    g[s].emplace_back(t, d);
-  }
-  auto dists = dijkstra(g, r);
-  rep(i, v) {
-    if (dists[i] == numeric_limits<long long>::max()) print("INF");
-    else print(dists[i]);
-  }
+  assert(is_prime(1e9+7) == true);
+  assert(is_prime(1e9+11) == false);
+
+  vector<int> primes = sieve_of_eratosthenes(30);
+  assert(primes == vector<int>({2, 3, 5, 7, 11, 13, 17, 19, 23, 29}));
+
+  map<long long, int> prime_factor = prime_factorize(630, primes);
+  long long recon = 1;
+  for (auto p : prime_factor) rep(i, p.second) recon *= p.first;
+  assert(recon == 630);
+
+  vector<long long> divisors = calc_divisors(630, prime_factor);
+  assert(divisors == vector<long long>({1, 2, 3, 5, 6, 7, 9, 10, 14, 15, 18, 21,30, 35,\
+                                        42, 45,63, 70, 90, 105, 126, 210, 315, 630}));
+
+  return 0;
 }
 ```
 {% endraw %}
@@ -75,9 +75,8 @@ int main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "graph/dijkstra.test.cpp"
-#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A&lang=ja"
-
+#line 1 "math/prime.test.cpp"
+#define IGNORE
 #line 1 "util/template.hpp"
 #include <bits/stdc++.h>
 using namespace std;
@@ -168,50 +167,82 @@ template<class T, class... U> inline void print(const T &x, const U&... y) { cou
 
 template<class T, class U>inline bool chmax(T &a, const U &b) { if(a<b){ a=b; return 1; } return 0; }
 template<class T, class U>inline bool chmin(T &a, const U &b) { if(b<a){ a=b; return 1; } return 0; }
-#line 1 "graph/dijkstra.hpp"
+#line 1 "math/prime.hpp"
+// naive check O(sqrt(N))
+inline bool is_prime(long long x) {
+  if (x <= 1) return false;
+  for (long long i = 2; i*i <= x; ++i) if (x % i == 0) return false;
+  return true;
+}
+
 /**
- * @brief Dijkstra
- * @note O((E+V) log V)
+ * @brief Sieve of Eratosthenes
+ * @note List primes O(NloglogN)
  */
-template<typename T>
-vector<T> dijkstra(const vector<vector<pair<int, T>>> &graph, int root) {
-  using P = pair<T, int>;
-  vector<T> dists(graph.size(), numeric_limits<T>::max());
-  priority_queue<P, vector<P>, greater<P>> que;
-  dists[root] = 0;
-  que.emplace(dists[root], root);
-  while (!que.empty()) {
-    T d; int cur;
-    tie(d, cur) = que.top(); que.pop();
-    if (dists[cur] < d) continue;
-    for (auto e : graph[cur]) {
-      int nx; T cost;
-      tie(nx, cost) = e;
-      if (dists[nx] > dists[cur] + cost) {
-        dists[nx] = dists[cur] + cost;
-        que.emplace(dists[nx], nx);
-      }
+vector<int> sieve_of_eratosthenes(int n = 200010) {
+  vector<bool> is_prime(n+1, true);
+  is_prime[0] = is_prime[1] = false;
+  for (int i = 0; i <= n; ++i) if (is_prime[i]) {
+    for (int j = i+i; j <= n; j+=i) is_prime[j] = false;
+  }
+  vector<int> primes;
+  for (int i = 2; i <= n; ++i) if (is_prime[i]) primes.push_back(i);
+  return primes;
+}
+
+/**
+ * @brief Prime Factorization
+ * @note prime table up to sqrt(N) is enough to factorize.
+ * @note O(sqrt(N))
+ */
+map<long long, int> prime_factorize(long long n, const vector<int> &primes) {
+  map<long long, int> prime_factor;
+  for (int p : primes) {
+    if (n < (long long) p * p) break;
+    while (n % p == 0) {
+      prime_factor[p] += 1;
+      n /= p;
     }
   }
-  return dists;
+  if (n != 1) prime_factor[n] += 1;
+  return prime_factor;
 }
-#line 5 "graph/dijkstra.test.cpp"
+
+/**
+ * @brief List divisors
+ */
+vector<long long> calc_divisors(long long n, const map<long long, int> &prime_factor) {
+  vector<long long> divisors(1, 1);
+  for (auto it : prime_factor) {
+    long long p; int k;
+    tie(p, k) = it;
+    int size = divisors.size();
+    for (int i = 0; i < k; ++i) {
+      for (int j = 0; j < size; ++j) divisors.push_back(divisors[i*size+j] * p);
+    }
+  }
+  sort(divisors.begin(), divisors.end());
+  return divisors;
+}
+#line 4 "math/prime.test.cpp"
 
 int main() {
-  int v, e, r;
-  cin>>v>>e>>r;
-  vector<vector<pair<int, long long>>> g(v);
-  rep(i, e) {
-    int s, t;
-    long long d;
-    cin>>s>>t>>d;
-    g[s].emplace_back(t, d);
-  }
-  auto dists = dijkstra(g, r);
-  rep(i, v) {
-    if (dists[i] == numeric_limits<long long>::max()) print("INF");
-    else print(dists[i]);
-  }
+  assert(is_prime(1e9+7) == true);
+  assert(is_prime(1e9+11) == false);
+
+  vector<int> primes = sieve_of_eratosthenes(30);
+  assert(primes == vector<int>({2, 3, 5, 7, 11, 13, 17, 19, 23, 29}));
+
+  map<long long, int> prime_factor = prime_factorize(630, primes);
+  long long recon = 1;
+  for (auto p : prime_factor) rep(i, p.second) recon *= p.first;
+  assert(recon == 630);
+
+  vector<long long> divisors = calc_divisors(630, prime_factor);
+  assert(divisors == vector<long long>({1, 2, 3, 5, 6, 7, 9, 10, 14, 15, 18, 21,30, 35,\
+                                        42, 45,63, 70, 90, 105, 126, 210, 315, 630}));
+
+  return 0;
 }
 
 ```

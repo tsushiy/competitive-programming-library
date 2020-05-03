@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: Sieve of Eratosthenes <small>(math/prime.hpp)</small>
+# :heavy_check_mark: Sieve of Eratosthenes <small>(math/prime.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -34,8 +34,11 @@ layout: default
     - Last commit date: 2019-09-23 22:34:31+09:00
 
 
-* Prime Factorization
-* List divisors
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/math/prime.test.cpp.html">math/prime.test.cpp</a>
 
 
 ## Code

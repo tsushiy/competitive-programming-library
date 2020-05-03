@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
+* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/dinic.test.cpp">View this file on GitHub</a>
     - Last commit date: 2019-10-12 15:20:31+09:00
 
@@ -73,7 +74,7 @@ int main() {
 #line 1 "graph/dinic.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A&lang=ja"
 
-#line 1 "graph/../util/template.hpp"
+#line 1 "util/template.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 #define REP(i,b,e) for(int i=(b);i<(e);++i)

@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
+* category: <a href="../../index.html#c8f6850ec2ec3fb32f203c1f4e3c2fd2">data_structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data_structure/union_find_tree.test.cpp">View this file on GitHub</a>
     - Last commit date: 2019-10-12 15:20:31+09:00
 
@@ -73,7 +74,7 @@ int main() {
 #line 1 "data_structure/union_find_tree.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A&lang=jp"
 
-#line 1 "data_structure/../util/template.hpp"
+#line 1 "util/template.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 #define REP(i,b,e) for(int i=(b);i<(e);++i)

@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
+* category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/gauss_jordan.test.cpp">View this file on GitHub</a>
     - Last commit date: 2019-10-12 15:20:31+09:00
 
@@ -103,7 +104,7 @@ int main() {
 #line 1 "math/gauss_jordan.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1328"
 
-#line 1 "math/../util/template.hpp"
+#line 1 "util/template.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 #define REP(i,b,e) for(int i=(b);i<(e);++i)

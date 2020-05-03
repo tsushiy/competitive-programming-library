@@ -49,6 +49,10 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/math/gauss_jordan.test.cpp.html">math/gauss_jordan.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/math/gcd.test.cpp.html">math/gcd.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/math/matrix.test.cpp.html">math/matrix.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/math/mod_comb.test.cpp.html">math/mod_comb.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/math/modint.test.cpp.html">math/modint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/math/prime.test.cpp.html">math/prime.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/math/runtime_mod_comb.test.cpp.html">math/runtime_mod_comb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/string/rolling_hash.test.cpp.html">string/rolling_hash.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/string/sa_is.test.cpp.html">string/sa_is.test.cpp</a>
 

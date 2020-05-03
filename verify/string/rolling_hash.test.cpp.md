@@ -29,6 +29,7 @@ layout: default
 
 <a href="../../index.html">Back to top page</a>
 
+* category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/rolling_hash.test.cpp">View this file on GitHub</a>
     - Last commit date: 2019-10-12 15:20:31+09:00
 
@@ -72,7 +73,7 @@ int main() {
 #line 1 "string/rolling_hash.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B&lang=ja"
 
-#line 1 "string/../util/template.hpp"
+#line 1 "util/template.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 #define REP(i,b,e) for(int i=(b);i<(e);++i)
