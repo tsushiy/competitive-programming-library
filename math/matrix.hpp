@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief Matrix data structure
  */

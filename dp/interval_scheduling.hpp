@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief 重み付き区間スケジューリング問題
  * @see http://ncastar.hatenablog.com/entry/20141004/1412435099

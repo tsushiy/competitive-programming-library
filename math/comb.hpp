@@ -1,3 +1,5 @@
+#pragma once
+
 template <unsigned int N = 50>
 struct Comb {
   long long c[N + 1][N + 1];

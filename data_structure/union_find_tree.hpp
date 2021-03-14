@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief UnionFind Tree
  * @note O(α(N))

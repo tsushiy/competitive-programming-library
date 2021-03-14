@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief Dijkstra
  * @note O((E+V) log V)

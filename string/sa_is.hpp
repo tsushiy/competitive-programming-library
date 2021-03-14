@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief SA-IS
  * @note construct : O(N)

@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief constexpr Modint data structure
  * @note support + - * / inv pow == != iostream

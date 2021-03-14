@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief Dinic
  * @note O(E・V^2)

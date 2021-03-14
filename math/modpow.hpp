@@ -1,3 +1,5 @@
+#pragma once
+
 long long modpow(long long x, long long n, long long mod = 1000000007) {
   if (n < 0) return 0;
   long long ret = 1;

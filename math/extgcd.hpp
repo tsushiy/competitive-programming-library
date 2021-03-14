@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief Extended Euclidean Algorithm
  * @return gcd(a, b)

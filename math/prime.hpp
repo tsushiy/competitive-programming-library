@@ -1,3 +1,5 @@
+#pragma once
+
 // naive check O(sqrt(N))
 inline bool is_prime(long long x) {
   if (x <= 1) return false;

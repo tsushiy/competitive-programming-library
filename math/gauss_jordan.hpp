@@ -1,3 +1,8 @@
+#pragma once
+
+#include "matrix.hpp"
+#include "modint.hpp"
+
 /**
  * @brief Gauss-Jordan Elimination (Real Number)
  * @see http://drken1215.hatenablog.com/entry/2019/03/20/202800

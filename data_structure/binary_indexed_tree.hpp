@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief BinaryIndexedTree
  * @note add|sum : O(logN)

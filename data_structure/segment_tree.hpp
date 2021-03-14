@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief SegmentTree
  * @note construct : O(N)

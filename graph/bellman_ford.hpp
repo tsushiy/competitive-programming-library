@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief Bellman-Ford
  * @note O(V・E)

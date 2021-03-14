@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief RollingHash (Rabin-Karp)
  * @note construct : O(N)

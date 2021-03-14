@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief Runtime ModCombination
  * @note construct table : O(N)

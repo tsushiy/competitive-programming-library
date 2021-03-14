@@ -1,3 +1,5 @@
+#pragma once
+
 /**
  * @brief Warshall-Floyd
  * @note O(N^3)
