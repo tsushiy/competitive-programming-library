@@ -1,6 +1,6 @@
 # Competitive Programming Library
 
-[![Actions Status](https://github.com/tsushiy/kyopro-library/workflows/verify/badge.svg)](https://github.com/tsushiy/kyopro-library/actions)
+[![Actions Status](https://github.com/tsushiy/competitive-programming-library/workflows/verify/badge.svg)](https://github.com/tsushiy/competitive-programming-library/actions)
 
 ## Data Structure
 
