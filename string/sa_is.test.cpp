@@ -9,21 +9,27 @@ bool bisect(vector<int> &sa, string &s, string &t) {
   while (left != right) {
     int mid = (left + right) / 2;
     if (s.substr(sa[mid], m) == t) return true;
-    if (s.substr(sa[mid], m) > t) right = mid;
-    else left = left == mid ? mid+1 : mid;
+    if (s.substr(sa[mid], m) > t) {
+      right = mid;
+    } else {
+      left = left == mid ? mid + 1 : mid;
+    }
   }
   return false;
 }
 
 int main() {
-  std::string s; std::cin>>s;
+  std::string s;
+  std::cin >> s;
 
   SuffixArray sa(s);
   vector<int> &sufarray = sa.sa;
 
-  int q; cin>>q;
+  int q;
+  cin >> q;
   for (int i = 0; i < q; ++i) {
-    string t; cin>>t;
+    string t;
+    cin >> t;
     cout << (int)bisect(sufarray, s, t) << endl;
   }
 }

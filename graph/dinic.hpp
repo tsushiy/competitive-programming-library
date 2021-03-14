@@ -2,7 +2,7 @@
  * @brief Dinic
  * @note O(E・V^2)
  */
-template<typename T>
+template <typename T>
 struct Dinic {
 private:
   struct Edge {
@@ -16,9 +16,10 @@ private:
 
 public:
   Dinic(int n) : graph(n), level(n), iter(n) {}
+
   void add_edge(int from, int to, T cap) {
     graph[from].emplace_back(to, cap, graph[to].size());
-    graph[to].emplace_back(from, 0, graph[from].size()-1);
+    graph[to].emplace_back(from, 0, graph[from].size() - 1);
   }
 
 private:
@@ -28,7 +29,8 @@ private:
     level[s] = 0;
     que.push(s);
     while (!que.empty()) {
-      int v = que.front(); que.pop();
+      int v = que.front();
+      que.pop();
       for (auto &e : graph[v]) {
         if (e.cap > 0 and level[e.to] < 0) {
           level[e.to] = level[v] + 1;
@@ -37,6 +39,7 @@ private:
       }
     }
   }
+
   T dfs(int x, int dst, T flow) {
     if (x == dst) return flow;
     for (int &i = iter[x]; i < (int)graph[x].size(); ++i) {
@@ -58,7 +61,7 @@ public:
     bfs(src);
     while (level[dst] >= 0) {
       iter.assign(iter.size(), 0);
-      while(true) {
+      while (true) {
         T f = dfs(src, dst, numeric_limits<T>::max());
         if (f <= 0) break;
         flow += f;

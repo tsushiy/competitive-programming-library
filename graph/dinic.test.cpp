@@ -5,13 +5,13 @@
 
 int main() {
   int v, e;
-  cin>>v>>e;
+  cin >> v >> e;
   Dinic<long long> di(v);
   rep(i, e) {
     int u, v;
     long long c;
-    cin>>u>>v>>c;
+    cin >> u >> v >> c;
     di.add_edge(u, v, c);
   }
-  print(di.max_flow(0, v-1));
+  print(di.max_flow(0, v - 1));
 }

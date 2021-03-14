@@ -4,12 +4,12 @@
  * @note Do Not use Integer type.
  * @note かなり誤差が出る
  */
-template<typename T>
+template <typename T>
 int gauss_jordan(Matrix<T> &A) {
   constexpr double EPS = 1e-6;
   int m = A.height(), n = A.width();
   int rank = 0;
-  for (int col = 0; col < n-1; ++col) {
+  for (int col = 0; col < n - 1; ++col) {
     int pivot = -1;
     T ma = EPS;
     for (int row = rank; row < m; ++row) {
@@ -33,11 +33,11 @@ int gauss_jordan(Matrix<T> &A) {
   return rank;
 }
 
-template<typename T>
+template <typename T>
 int linear_equation(Matrix<T> A, vector<T> b, vector<T> &res) {
   constexpr double EPS = 1e-6;
   int m = A.height(), n = A.width();
-  Matrix<T> M(m, n+1);
+  Matrix<T> M(m, n + 1);
   for (int i = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j) M[i][j] = A[i][j];
     M[i][n] = b[i];
@@ -55,11 +55,11 @@ int linear_equation(Matrix<T> A, vector<T> b, vector<T> &res) {
  * @brief Gauss-Jordan Elimination (Modint)
  * @see http://drken1215.hatenablog.com/entry/2019/03/20/202800
  */
-template<long long MOD>
+template <long long MOD>
 int gauss_jordan(Matrix<Mint<MOD>> &A) {
   int m = A.height(), n = A.width();
   int rank = 0;
-  for (int col = 0; col < n-1; ++col) {
+  for (int col = 0; col < n - 1; ++col) {
     int pivot = -1;
     for (int row = rank; row < m; ++row) {
       if (A[row][col] != 0) {
@@ -82,10 +82,10 @@ int gauss_jordan(Matrix<Mint<MOD>> &A) {
   return rank;
 }
 
-template<long long MOD>
+template <long long MOD>
 int linear_equation(Matrix<Mint<MOD>> A, vector<Mint<MOD>> b, vector<Mint<MOD>> &res) {
   int m = A.height(), n = A.width();
-  Matrix<Mint<MOD>> M(m, n+1);
+  Matrix<Mint<MOD>> M(m, n + 1);
   for (int i = 0; i < m; ++i) {
     for (int j = 0; j < n; ++j) M[i][j] = A[i][j];
     M[i][n] = b[i];

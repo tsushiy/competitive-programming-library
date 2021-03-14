@@ -4,8 +4,10 @@
  */
 struct Interval {
   int s, t, weight;
+
   Interval(int s, int t, int weight) : s(s), t(t), weight(weight) {}
-  bool operator<(const Interval & rhs) const {
+
+  bool operator<(const Interval &rhs) const {
     if (t != rhs.t) return t < rhs.t;
     if (s != rhs.s) return s < rhs.s;
     return weight < rhs.weight;
@@ -19,8 +21,8 @@ long long scheduling(vector<Interval> &intervals) {
   for (int i = 0; i < (int)intervals.size(); ++i) {
     int prev = lower_bound(buf.begin(), buf.end(), intervals[i].s) - buf.begin();
     --prev;
-    dp[i] = max((i ? dp[i-1] : 0), intervals[i].weight + ((prev == -1) ? 0 : dp[prev]));
+    dp[i] = max((i ? dp[i - 1] : 0), intervals[i].weight + ((prev == -1) ? 0 : dp[prev]));
     buf.push_back(intervals[i].t);
   }
-  return dp[intervals.size()-1];
+  return dp[intervals.size() - 1];
 }

@@ -1,4 +1,4 @@
-template<typename T>
+template <typename T>
 T gcd(T a, T b) {
   while (a) {
     b %= a;
@@ -10,11 +10,14 @@ T gcd(T a, T b) {
 /**
  * @note Be careful of overflow
  */
-template<typename T>
+template <typename T>
 T lcm(T a, T b) {
   return a / gcd(a, b) * b;
 
   // check overflow
-  // if (b <= numeric_limits<T>::max() / (a / gcd(a, b))) return ret;
-  // else return numeric_limits<T>::max();
+  // if (b <= numeric_limits<T>::max() / (a / gcd(a, b))) {
+  //   return ret;
+  // } else {
+  //   return numeric_limits<T>::max();
+  // }
 }

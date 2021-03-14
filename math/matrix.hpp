@@ -1,7 +1,7 @@
 /**
  * @brief Matrix data structure
  */
-template<typename T>
+template <typename T>
 struct Matrix {
 private:
   vector<vector<T>> mat;
@@ -10,7 +10,7 @@ public:
   Matrix() {}
   Matrix(int n, int m) : mat(n, vector<T>(m, 0)) {}
   Matrix(int n) : mat(n, vector<T>(n, 0)) {}
-  Matrix(vector<vector<T>> mat) : mat(mat) {};
+  Matrix(vector<vector<T>> mat) : mat(mat){};
 
   int height() const { return mat.size(); }
   int width() const { return mat[0].size(); }
@@ -73,9 +73,9 @@ public:
       os << "[";
       for (int j = 0; j < w; ++j) {
         os << x[i][j];
-        if (j != w-1) os <<", ";
+        if (j != w - 1) os << ", ";
       }
-      os << (i != h-1 ? "]\n" : "]");
+      os << (i != h - 1 ? "]\n" : "]");
     }
     return os;
   }

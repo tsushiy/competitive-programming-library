@@ -5,17 +5,20 @@
 
 int main() {
   int v, e, r;
-  cin>>v>>e>>r;
+  cin >> v >> e >> r;
   vector<vector<pair<int, long long>>> g(v);
   rep(i, e) {
     int s, t;
     long long d;
-    cin>>s>>t>>d;
+    cin >> s >> t >> d;
     g[s].emplace_back(t, d);
   }
   auto dists = dijkstra(g, r);
   rep(i, v) {
-    if (dists[i] == numeric_limits<long long>::max()) print("INF");
-    else print(dists[i]);
+    if (dists[i] == numeric_limits<long long>::max()) {
+      print("INF");
+    } else {
+      print(dists[i]);
+    }
   }
 }
