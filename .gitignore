@@ -1,6 +1,6 @@
-.DS_STORE
-.vscode
-a.out
-.input
-.output
-test/*
+*.in
+*.out
+*.dSYM
+/.input
+/.output
+!/.vscode/settings.json
