@@ -6,6 +6,7 @@ inline bool chmax(T &a, const U &b) {
   }
   return 0;
 }
+
 template <class T, class U>
 inline bool chmin(T &a, const U &b) {
   if (b < a) {
