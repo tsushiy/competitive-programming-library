@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_D&lang=ja"
 
-#include "../util/template.hpp"
+#include "../util/base.hpp"
 #include "sa_is.hpp"
 
 bool bisect(vector<int> &sa, string &s, string &t) {

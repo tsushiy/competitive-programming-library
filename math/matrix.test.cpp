@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_7_D"
 
-#include "../util/template.hpp"
+#include "../util/base.hpp"
 #include "matrix.hpp"
 
 int main() {
@@ -8,11 +8,11 @@ int main() {
   cin >> n >> m >> l;
   Matrix<long long> A(n, m);
   Matrix<long long> B(m, l);
-  rep(i, n) cin >> A[i];
-  rep(i, m) cin >> B[i];
+  cin >> A;
+  cin >> B;
   auto C = A * B;
-  rep(i, n) {
-    rep(j, l) {
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < l; ++j) {
       cout << C[i][j];
       if (j != l - 1) {
         cout << " ";

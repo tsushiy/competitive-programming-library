@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_E&lang=ja"
 
-#include "../util/template.hpp"
+#include "../util/base.hpp"
 #include "extgcd.hpp"
 
 int main() {

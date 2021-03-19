@@ -1,5 +1,5 @@
 #define IGNORE
-#include "../util/template.hpp"
+#include "../util/base.hpp"
 #include "prime.hpp"
 
 int main() {
@@ -11,7 +11,9 @@ int main() {
 
   map<long long, int> prime_factor = prime_factorize(630, primes);
   long long recon = 1;
-  for (auto p : prime_factor) rep(i, p.second) recon *= p.first;
+  for (auto p : prime_factor) {
+    for (int i = 0; i < p.second; ++i) recon *= p.first;
+  }
   assert(recon == 630);
 
   vector<long long> divisors = calc_divisors(630, prime_factor);

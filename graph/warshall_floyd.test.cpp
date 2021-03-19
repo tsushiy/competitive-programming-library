@@ -1,29 +1,32 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C&lang=ja"
 
-#include "../util/template.hpp"
+#include "../util/base.hpp"
 #include "warshall_floyd.hpp"
 
 int main() {
   int v, e;
   cin >> v >> e;
   vector<vector<pair<int, long long>>> g(v);
-  rep(i, e) {
+
+  for (int i = 0; i < e; ++i) {
     int s, t;
     long long d;
     cin >> s >> t >> d;
     g[s].emplace_back(t, d);
   }
-  auto dists = warshall_floyd(g);
 
+  auto dists = warshall_floyd(g);
   bool negloop = false;
-  rep(i, v) if (dists[i][i] < 0) negloop = true;
+  for (int i = 0; i < v; ++i) {
+    if (dists[i][i] < 0) negloop = true;
+  }
   if (negloop) {
-    print("NEGATIVE CYCLE");
+    cout << "NEGATIVE CYCLE" << endl;
     return 0;
   }
 
-  rep(i, v) {
-    rep(j, v) {
+  for (int i = 0; i < v; ++i) {
+    for (int j = 0; j < v; ++j) {
       if (dists[i][j] == numeric_limits<long long>::max()) {
         cout << "INF";
       } else {
@@ -36,6 +39,4 @@ int main() {
       }
     }
   }
-
-  return 0;
 }

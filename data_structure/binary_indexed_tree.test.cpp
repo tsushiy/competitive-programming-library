@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B&lang=ja"
 
-#include "../util/template.hpp"
+#include "../util/base.hpp"
 #include "binary_indexed_tree.hpp"
 
 int main() {

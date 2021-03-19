@@ -1,5 +1,5 @@
 #define IGNORE
-#include "../util/template.hpp"
+#include "../util/base.hpp"
 #include "modint.hpp"
 
 int main() {

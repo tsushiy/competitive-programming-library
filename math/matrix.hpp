@@ -81,4 +81,10 @@ public:
     }
     return os;
   }
+  friend istream &operator>>(istream &is, Matrix<T> &mat) {
+    for (vector<T> &vec : mat.mat) {
+      for (T &x : vec) is >> x;
+    }
+    return is;
+  }
 };

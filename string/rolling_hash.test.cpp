@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B&lang=ja"
 
-#include "../util/template.hpp"
+#include "../util/base.hpp"
 #include "rolling_hash.hpp"
 
 int main() {
@@ -9,8 +9,8 @@ int main() {
   RollingHash rhs(s);
   RollingHash rht(t);
   vector<long long> target = rht.get(0, t.size());
-  rep(i, (int)s.size() - (int)t.size() + 1) {
+  for (int i = 0; i < ((int)s.size() - (int)t.size() + 1); ++i) {
     vector<long long> cur = rhs.get(i, i + t.size());
-    if (target == cur) print(i);
+    if (target == cur) cout << i << endl;
   }
 }
