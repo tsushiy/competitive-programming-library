@@ -5,12 +5,12 @@
  * @note add|sum : O(logN)
  */
 template <typename T>
-struct BinaryIndexedTree {
+struct BIT {
 private:
   vector<T> node;
 
 public:
-  BinaryIndexedTree(int n_) : node() { node.resize(n_, 0); }
+  BIT(int n_) : node() { node.resize(n_, 0); }
 
   void add(int k, T x) {
     for (int j = k + 1; j <= (int)node.size(); j += j & -j) node[j - 1] += x;

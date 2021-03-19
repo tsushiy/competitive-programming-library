@@ -6,7 +6,7 @@
 int main() {
   int n, q;
   cin >> n >> q;
-  BinaryIndexedTree<int> bit(n);
+  BIT<int> bit(n);
   for (int i = 0; i < q; ++i) {
     int com, x, y;
     cin >> com >> x >> y;
