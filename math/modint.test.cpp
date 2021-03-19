@@ -1,4 +1,4 @@
-#define IGNORE
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../util/base.hpp"
 #include "modint.hpp"
 
@@ -19,6 +19,8 @@ int main() {
   static_assert(Mint<MOD>(2).pow(4) == Mint<MOD>(16), "");
   static_assert(Mint<MOD>(1).inv() * 1 == 1, "");
   static_assert(Mint<MOD>(7).inv() * 7 == 1, "");
+
+  cout << "Hello World" << endl;
 
   return 0;
 }

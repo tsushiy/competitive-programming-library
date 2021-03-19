@@ -1,4 +1,4 @@
-#define IGNORE
+#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_1_A"
 #include "../util/base.hpp"
 #include "prime.hpp"
 
@@ -19,6 +19,8 @@ int main() {
   vector<long long> divisors = calc_divisors(630, prime_factor);
   assert(divisors == vector<long long>({1,  2,  3,  5,  6,  7,  9,  10,  14,  15,  18,  21,
                                         30, 35, 42, 45, 63, 70, 90, 105, 126, 210, 315, 630}));
+
+  cout << "Hello World" << endl;
 
   return 0;
 }
