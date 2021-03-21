@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cstddef>
+#include <string>
+#include <vector>
+
 /**
  * @brief SA-IS
  * @note construct : O(N)
@@ -7,12 +11,12 @@
 struct SuffixArray {
 public:
   static const int k = 256;  // alphabet size
-  vector<int> sa;
+  std::vector<int> sa;
 
-  SuffixArray(const string &str) {
-    vector<int> s(str.size() + 1);
+  SuffixArray(const std::string &str) {
+    std::vector<int> s(str.size() + 1);
     s.back() = 0;
-    for (size_t i = 0; i < str.size(); ++i) s[i] = (int)str[i];
+    for (std::size_t i = 0; i < str.size(); ++i) s[i] = (int)str[i];
     sa_is(sa, s, k);
     sa.erase(sa.begin());
   }
@@ -20,11 +24,11 @@ public:
   inline int operator[](int i) const { return sa[i]; }
 
 private:
-  void sa_is(vector<int> &sa, const vector<int> &s, int k) {
+  void sa_is(std::vector<int> &sa, const std::vector<int> &s, int k) {
     int n = s.size();
 
     // Scan S once to classify all the characters as L- or S-type into type;
-    vector<bool> type(n);  // S: true, L: false;
+    std::vector<bool> type(n);  // S: true, L: false;
     type.back() = true;
     for (int i = n - 2; i >= 0; --i) {
       if (s[i] == s[i + 1]) {
@@ -35,7 +39,7 @@ private:
     }
 
     // Scan type once to find all the LMS-substrings in S into lms;
-    vector<int> lms;
+    std::vector<int> lms;
     for (int i = 0; i < n; ++i) {
       if (is_lms(type, i)) lms.emplace_back(i);
     }
@@ -49,7 +53,7 @@ private:
     sa.resize(nlms);
 
     // Name each LMS-substring in S by its bucket index to get a new shortened string S1;
-    vector<int> s1(n, -1);
+    std::vector<int> s1(n, -1);
     s1[sa[0]] = 0;
     int name = 0;
     for (int i = 0; i < nlms - 1; ++i) {
@@ -72,7 +76,7 @@ private:
     // Each character in S1 is unique
     // then Directly compute SA1 from S1
     // else SA-IS(S1, SA1); where recursive call happens
-    vector<int> sa1(nlms);
+    std::vector<int> sa1(nlms);
     int k1 = name + 1;
     if (k1 == nlms) {
       for (int i = 0; i < k1; ++i) sa1[s1[i]] = i;
@@ -85,23 +89,23 @@ private:
     induced_sort(sa, s, k, type, sa1);
   }
 
-  bool is_lms(const vector<bool> &type, int idx) {
+  bool is_lms(const std::vector<bool> &type, int idx) {
     return idx > 0 && type[idx] == true && type[idx - 1] == false;
   }
 
-  void calc_bucket(const vector<int> &s, vector<int> &bucket, int k) {
+  void calc_bucket(const std::vector<int> &s, std::vector<int> &bucket, int k) {
     bucket.assign(k, 0);
     for (int ch : s) ++bucket[ch];
     for (int i = 0; i < k - 1; ++i) bucket[i + 1] += bucket[i];
   }
 
-  void induced_sort(vector<int> &sa, const vector<int> &s, int k, const vector<bool> &type,
-                    const vector<int> &lms) {
+  void induced_sort(std::vector<int> &sa, const std::vector<int> &s, int k,
+                    const std::vector<bool> &type, const std::vector<int> &lms) {
     int n = s.size();
     sa.resize(n);
     sa.assign(n, -1);
 
-    vector<int> bucket(k);
+    std::vector<int> bucket(k);
 
     calc_bucket(s, bucket, k);
     for (auto it = lms.rbegin(); it != lms.rend(); ++it) {

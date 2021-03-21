@@ -1,12 +1,14 @@
 #pragma once
 
+#include <vector>
+
 /**
  * @brief UnionFind Tree
  * @note O(α(N))
  */
 struct UnionFind {
 private:
-  vector<int> par, rank, sizes;
+  std::vector<int> par, rank, sizes;
 
 public:
   UnionFind(int n) : par(n, -1), rank(n, 0), sizes(n, 1) {}

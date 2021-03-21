@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <iostream>
 #include <map>
 #include <set>
@@ -18,7 +19,7 @@ std::ostream &operator<<(std::ostream &os, const std::pair<T, U> &pa) {
   return os << pa.first << ' ' << pa.second;
 }
 
-template <size_t N, typename... T>
+template <std::size_t N, typename... T>
 std::ostream &print_tuple(std::ostream &os, const std::tuple<T...> &tup) {
   if constexpr (N != 1UL) {
     print_tuple<N - 1, T...>(os, tup);

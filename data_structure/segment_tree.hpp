@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cassert>
+#include <limits>
+#include <vector>
+
 /**
  * @brief SegmentTree
  * @note construct : O(N)
@@ -9,7 +13,7 @@ template <typename T, typename Monoid>
 struct SegmentTree {
 private:
   int n;
-  vector<T> node;
+  std::vector<T> node;
 
 public:
   SegmentTree(int n_) : node() {
@@ -48,12 +52,12 @@ struct PlusMonoid {
 
 template <typename T>
 struct MaxMonoid {
-  static constexpr T unit() { return numeric_limits<T>::min(); }
+  static constexpr T unit() { return std::numeric_limits<T>::min(); }
   static constexpr T operate(T a, T b) { return max(a, b); }
 };
 
 template <typename T>
 struct MinMonoid {
-  static constexpr T unit() { return numeric_limits<T>::max(); }
+  static constexpr T unit() { return std::numeric_limits<T>::max(); }
   static constexpr T operate(T a, T b) { return min(a, b); }
 };

@@ -1,28 +1,35 @@
 #pragma once
 
+#include <cassert>
+#include <cstddef>
+#include <vector>
+
 /**
  * @brief Matrix data structure
  */
 template <typename T>
 struct Matrix {
 private:
-  vector<vector<T>> mat;
+  std::vector<std::vector<T>> mat;
 
 public:
   Matrix() {}
   Matrix(int n, int m) : mat(n, vector<T>(m, 0)) {}
   Matrix(int n) : mat(n, vector<T>(n, 0)) {}
-  Matrix(vector<vector<T>> mat) : mat(mat){};
+  Matrix(std::vector<std::vector<T>> mat) : mat(mat){};
 
   int height() const { return mat.size(); }
   int width() const { return mat[0].size(); }
-  vector<T> &operator[](size_t k) { return mat.at(k); }
-  const vector<T> &operator[](size_t k) const { return mat.at(k); }
-  static Matrix unit(size_t n) {
+
+  std::vector<T> &operator[](std::size_t k) { return mat.at(k); }
+  const std::vector<T> &operator[](std::size_t k) const { return mat.at(k); }
+
+  static Matrix unit(std::size_t n) {
     Matrix I(n);
     for (int i = 0; i < (int)n; ++i) I[i][i] = 1;
     return I;
   }
+
   Matrix &operator+=(const Matrix &B) {
     int h = this->height(), w = this->width();
     assert(h == B.height() and w == B.width());
@@ -33,6 +40,7 @@ public:
     }
     return *this;
   }
+
   Matrix &operator-=(const Matrix &B) {
     int h = this->height(), w = this->width();
     assert(h == B.height() and w == B.width());
@@ -43,10 +51,11 @@ public:
     }
     return *this;
   }
+
   Matrix &operator*=(const Matrix &B) {
     int h = this->height(), z = this->width(), w = B.width();
     assert(z == B.height());
-    vector<vector<T>> ret(h, vector<T>(w, 0));
+    std::vector<std::vector<T>> ret(h, vector<T>(w, 0));
     for (int i = 0; i < h; ++i) {
       for (int j = 0; j < w; ++j) {
         for (int k = 0; k < z; ++k) {
@@ -57,9 +66,13 @@ public:
     (this->mat).swap(ret);
     return *this;
   }
+
   Matrix operator+(const Matrix &B) const { return Matrix(*this) += B; }
+
   Matrix operator-(const Matrix &B) const { return Matrix(*this) -= B; }
+
   Matrix operator*(const Matrix &B) const { return Matrix(*this) *= B; }
+
   Matrix pow(long long k) {
     Matrix B(this->mat), ret = unit(this->height());
     while (k) {
@@ -69,7 +82,8 @@ public:
     }
     return ret;
   }
-  friend ostream &operator<<(ostream &os, const Matrix<T> &x) {
+
+  friend std::ostream &operator<<(std::ostream &os, const Matrix<T> &x) {
     int h = x.height(), w = x.width();
     for (int i = 0; i < h; ++i) {
       os << "[";
@@ -81,8 +95,9 @@ public:
     }
     return os;
   }
-  friend istream &operator>>(istream &is, Matrix<T> &mat) {
-    for (vector<T> &vec : mat.mat) {
+
+  friend std::istream &operator>>(std::istream &is, Matrix<T> &mat) {
+    for (std::vector<T> &vec : mat.mat) {
       for (T &x : vec) is >> x;
     }
     return is;

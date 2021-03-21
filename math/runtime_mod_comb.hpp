@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cstddef>
+#include <vector>
+
 /**
  * @brief Runtime ModCombination
  * @note construct table : O(N)
@@ -11,14 +14,14 @@ private:
   long long MOD;
 
 public:
-  vector<long long> fac;
-  vector<long long> inv;
-  vector<long long> ifac;
+  std::vector<long long> fac;
+  std::vector<long long> inv;
+  std::vector<long long> ifac;
 
   RuntimeModComb(unsigned int N, long long MOD) : N(N), MOD(MOD), fac(), inv(), ifac() {
     fac.resize(N), inv.resize(N), ifac.resize(N);
     fac[0] = fac[1] = inv[1] = ifac[0] = ifac[1] = 1;
-    for (size_t i = 2; i <= N; ++i) {
+    for (std::size_t i = 2; i <= N; ++i) {
       fac[i] = fac[i - 1] * i % MOD;
       inv[i] = MOD - inv[MOD % i] * (MOD / i) % MOD;
       ifac[i] = ifac[i - 1] * inv[i] % MOD;

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
 /**
  * @brief RollingHash (Rabin-Karp)
  * @note construct : O(N)
@@ -10,9 +13,9 @@ struct RollingHash {
   const int base[ms] = {1007, 2009};
   const int mod[ms] = {1000000007, 1000000009};
 
-  vector<long long> hash[ms], power[ms];
+  std::vector<long long> hash[ms], power[ms];
 
-  RollingHash(const string &s) {
+  RollingHash(const std::string &s) {
     int n = s.size();
     for (int i = 0; i < ms; ++i) {
       hash[i].assign(n + 1, 0);
@@ -25,8 +28,8 @@ struct RollingHash {
   }
 
   // [l, r)
-  vector<long long> get(int l, int r) const {
-    vector<long long> ret(ms);
+  std::vector<long long> get(int l, int r) const {
+    std::vector<long long> ret(ms);
     for (int i = 0; i < ms; ++i) {
       long long res = hash[i][r] - hash[i][l] * power[i][r - l] % mod[i];
       if (res < 0) res += mod[i];

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <algorithm>
+#include <vector>
+
 /**
  * @brief 重み付き区間スケジューリング問題
  * @see http://ncastar.hatenablog.com/entry/20141004/1412435099
@@ -16,14 +19,14 @@ struct Interval {
   }
 };
 
-long long scheduling(vector<Interval> &intervals) {
-  sort(intervals.begin(), intervals.end());
-  vector<long long> dp(intervals.size(), 0);
-  vector<int> buf;
+long long scheduling(std::vector<Interval> &intervals) {
+  std::sort(intervals.begin(), intervals.end());
+  std::vector<long long> dp(intervals.size(), 0);
+  std::vector<int> buf;
   for (int i = 0; i < (int)intervals.size(); ++i) {
-    int prev = lower_bound(buf.begin(), buf.end(), intervals[i].s) - buf.begin();
+    int prev = std::lower_bound(buf.begin(), buf.end(), intervals[i].s) - buf.begin();
     --prev;
-    dp[i] = max((i ? dp[i - 1] : 0), intervals[i].weight + ((prev == -1) ? 0 : dp[prev]));
+    dp[i] = std::max((i ? dp[i - 1] : 0), intervals[i].weight + ((prev == -1) ? 0 : dp[prev]));
     buf.push_back(intervals[i].t);
   }
   return dp[intervals.size() - 1];

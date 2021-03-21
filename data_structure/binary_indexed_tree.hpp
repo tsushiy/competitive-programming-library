@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 /**
  * @brief BinaryIndexedTree
  * @note add|sum : O(logN)
@@ -8,7 +10,7 @@ template <typename T>
 struct BIT {
 private:
   int n;
-  vector<T> node;
+  std::vector<T> node;
 
 public:
   BIT(int n) : n(n), node(n, 0) {}

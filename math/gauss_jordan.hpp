@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cmath>
+#include <utility>
+#include <vector>
+
 #include "matrix.hpp"
 #include "modint.hpp"
 
@@ -18,17 +22,17 @@ int gauss_jordan(Matrix<T> &A) {
     int pivot = -1;
     T ma = EPS;
     for (int row = rank; row < m; ++row) {
-      if (abs(A[row][col]) > ma) {
-        ma = abs(A[row][col]);
+      if (std::abs(A[row][col]) > ma) {
+        ma = std::abs(A[row][col]);
         pivot = row;
       }
     }
     if (pivot == -1) continue;
-    swap(A[pivot], A[rank]);
+    std::swap(A[pivot], A[rank]);
     T fac = A[rank][col];
     for (int col2 = 0; col2 < n; ++col2) A[rank][col2] /= fac;
     for (int row = 0; row < m; ++row) {
-      if (row != rank and abs(A[row][col]) > EPS) {
+      if (row != rank and std::abs(A[row][col]) > EPS) {
         T fac = A[row][col];
         for (int col2 = 0; col2 < n; ++col2) A[row][col2] -= A[rank][col2] * fac;
       }
@@ -39,7 +43,7 @@ int gauss_jordan(Matrix<T> &A) {
 }
 
 template <typename T>
-int linear_equation(Matrix<T> A, vector<T> b, vector<T> &res) {
+int linear_equation(Matrix<T> A, std::vector<T> b, std::vector<T> &res) {
   constexpr double EPS = 1e-6;
   int m = A.height(), n = A.width();
   Matrix<T> M(m, n + 1);
@@ -49,7 +53,7 @@ int linear_equation(Matrix<T> A, vector<T> b, vector<T> &res) {
   }
   int rank = gauss_jordan(M);
   for (int row = rank; row < m; ++row) {
-    if (abs(M[row][n]) > EPS) return -1;
+    if (std::abs(M[row][n]) > EPS) return -1;
   }
   res.assign(n, 0);
   for (int i = 0; i < rank; ++i) res[i] = M[i][n];
@@ -73,7 +77,7 @@ int gauss_jordan(Matrix<Mint<MOD>> &A) {
       }
     }
     if (pivot == -1) continue;
-    swap(A[pivot], A[rank]);
+    std::swap(A[pivot], A[rank]);
     Mint<MOD> inv = A[rank][col].inv();
     for (int col2 = 0; col2 < n; ++col2) A[rank][col2] *= inv;
     for (int row = 0; row < m; ++row) {
@@ -88,7 +92,7 @@ int gauss_jordan(Matrix<Mint<MOD>> &A) {
 }
 
 template <long long MOD>
-int linear_equation(Matrix<Mint<MOD>> A, vector<Mint<MOD>> b, vector<Mint<MOD>> &res) {
+int linear_equation(Matrix<Mint<MOD>> A, std::vector<Mint<MOD>> b, std::vector<Mint<MOD>> &res) {
   int m = A.height(), n = A.width();
   Matrix<Mint<MOD>> M(m, n + 1);
   for (int i = 0; i < m; ++i) {

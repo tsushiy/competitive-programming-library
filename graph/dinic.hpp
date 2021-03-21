@@ -1,5 +1,9 @@
 #pragma once
 
+#include <limits>
+#include <queue>
+#include <vector>
+
 /**
  * @brief Dinic
  * @note O(E・V^2)
@@ -13,8 +17,8 @@ private:
     int rev;
     Edge(int to, T cap, int rev) : to(to), cap(cap), rev(rev) {}
   };
-  vector<vector<Edge>> graph;
-  vector<int> level, iter;
+  std::vector<std::vector<Edge>> graph;
+  std::vector<int> level, iter;
 
 public:
   Dinic(int n) : graph(n), level(n), iter(n) {}
@@ -27,7 +31,7 @@ public:
 private:
   void bfs(int s) {
     level.assign(level.size(), -1);
-    queue<int> que;
+    std::queue<int> que;
     level[s] = 0;
     que.push(s);
     while (!que.empty()) {
@@ -64,7 +68,7 @@ public:
     while (level[dst] >= 0) {
       iter.assign(iter.size(), 0);
       while (true) {
-        T f = dfs(src, dst, numeric_limits<T>::max());
+        T f = dfs(src, dst, std::numeric_limits<T>::max());
         if (f <= 0) break;
         flow += f;
       }
