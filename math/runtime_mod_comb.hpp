@@ -14,12 +14,9 @@ private:
   long long MOD;
 
 public:
-  std::vector<long long> fac;
-  std::vector<long long> inv;
-  std::vector<long long> ifac;
+  std::vector<long long> fac, inv, ifac;
 
-  RuntimeModComb(unsigned int N, long long MOD) : N(N), MOD(MOD), fac(), inv(), ifac() {
-    fac.resize(N), inv.resize(N), ifac.resize(N);
+  RuntimeModComb(unsigned int N, long long MOD) : N(N), MOD(MOD), fac(N), inv(N), ifac(N) {
     fac[0] = fac[1] = inv[1] = ifac[0] = ifac[1] = 1;
     for (std::size_t i = 2; i <= N; ++i) {
       fac[i] = fac[i - 1] * i % MOD;

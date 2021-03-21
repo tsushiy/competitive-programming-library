@@ -16,6 +16,7 @@ std::vector<std::vector<T>> warshall_floyd(
     const std::vector<std::vector<std::pair<int, T>>> &graph) {
   int n = graph.size();
   std::vector<std::vector<T>> dists(n, std::vector<T>(n, std::numeric_limits<T>::max()));
+
   for (int i = 0; i < n; ++i) {
     dists[i][i] = 0;
     for (auto e : graph[i]) {
@@ -25,14 +26,13 @@ std::vector<std::vector<T>> warshall_floyd(
       dists[i][nx] = cost;
     }
   }
+
   for (int k = 0; k < n; ++k) {
     for (int i = 0; i < n; ++i) {
-      if (dists[i][k] != std::numeric_limits<T>::max()) {
-        for (int j = 0; j < n; ++j) {
-          if (dists[k][j] != std::numeric_limits<T>::max()) {
-            dists[i][j] = std::min(dists[i][j], dists[i][k] + dists[k][j]);
-          }
-        }
+      if (dists[i][k] == std::numeric_limits<T>::max()) continue;
+      for (int j = 0; j < n; ++j) {
+        if (dists[k][j] == std::numeric_limits<T>::max()) continue;
+        dists[i][j] = std::min(dists[i][j], dists[i][k] + dists[k][j]);
       }
     }
   }

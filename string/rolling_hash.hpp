@@ -9,7 +9,7 @@
  * @note get hash : O(1)
  */
 struct RollingHash {
-  static constexpr int ms = 2;
+  static const int ms = 2;
   const int base[ms] = {1007, 2009};
   const int mod[ms] = {1000000007, 1000000009};
 

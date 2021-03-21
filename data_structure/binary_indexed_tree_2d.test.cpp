@@ -30,7 +30,7 @@ int main() {
 
     if (c == 0) {
       yaketenai.add(h, w, 1);
-      que.push(Taiyaki{t, h, w});
+      que.emplace(Taiyaki{t, h, w});
     } else if (c == 1) {
       if (yaketa.sum(h, w, h + 1, w + 1)) {
         yaketa.add(h, w, -1);

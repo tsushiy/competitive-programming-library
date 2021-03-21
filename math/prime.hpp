@@ -28,7 +28,7 @@ std::vector<int> sieve_of_eratosthenes(int n = 200010) {
   }
   std::vector<int> primes;
   for (int i = 2; i <= n; ++i) {
-    if (is_prime[i]) primes.push_back(i);
+    if (is_prime[i]) primes.emplace_back(i);
   }
   return primes;
 }
@@ -62,7 +62,7 @@ std::vector<long long> calc_divisors(long long n, const std::map<long long, int>
     std::tie(p, k) = it;
     int size = divisors.size();
     for (int i = 0; i < k; ++i) {
-      for (int j = 0; j < size; ++j) divisors.push_back(divisors[i * size + j] * p);
+      for (int j = 0; j < size; ++j) divisors.emplace_back(divisors[i * size + j] * p);
     }
   }
   std::sort(divisors.begin(), divisors.end());

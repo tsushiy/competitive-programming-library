@@ -33,14 +33,14 @@ private:
     level.assign(level.size(), -1);
     std::queue<int> que;
     level[s] = 0;
-    que.push(s);
+    que.emplace(s);
     while (!que.empty()) {
       int v = que.front();
       que.pop();
       for (auto &e : graph[v]) {
         if (e.cap > 0 and level[e.to] < 0) {
           level[e.to] = level[v] + 1;
-          que.push(e.to);
+          que.emplace(e.to);
         }
       }
     }

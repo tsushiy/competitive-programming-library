@@ -17,6 +17,7 @@ std::vector<T> bellman_ford(const std::vector<std::vector<std::pair<int, T>>> &g
   int n = graph.size();
   std::vector<T> dists(n, std::numeric_limits<T>::max());
   dists[root] = 0;
+
   for (int i = 0; i < n - 1; ++i) {
     for (int j = 0; j < n; ++j) {
       if (dists[j] == std::numeric_limits<T>::max()) continue;
@@ -28,13 +29,15 @@ std::vector<T> bellman_ford(const std::vector<std::vector<std::pair<int, T>>> &g
       }
     }
   }
-  std::queue<int> q;
+
+  std::queue<int> que;
   for (int i = 0; i < n; ++i) {
-    if (dists[i] != std::numeric_limits<T>::max()) q.push(i);
+    if (dists[i] != std::numeric_limits<T>::max()) que.emplace(i);
   }
-  while (!q.empty()) {
-    int i = q.front();
-    q.pop();
+
+  while (!que.empty()) {
+    int i = que.front();
+    que.pop();
     for (auto e : graph[i]) {
       int nx;
       T cost;
@@ -42,7 +45,7 @@ std::vector<T> bellman_ford(const std::vector<std::vector<std::pair<int, T>>> &g
       if (dists[nx] == std::numeric_limits<T>::min()) continue;
       if (dists[i] == std::numeric_limits<T>::min() or dists[nx] > dists[i] + cost) {
         dists[nx] = std::numeric_limits<T>::min();
-        q.push(nx);
+        que.emplace(nx);
       }
     }
   }

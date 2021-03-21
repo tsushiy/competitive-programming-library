@@ -27,7 +27,7 @@ long long scheduling(std::vector<Interval> &intervals) {
     int prev = std::lower_bound(buf.begin(), buf.end(), intervals[i].s) - buf.begin();
     --prev;
     dp[i] = std::max((i ? dp[i - 1] : 0), intervals[i].weight + ((prev == -1) ? 0 : dp[prev]));
-    buf.push_back(intervals[i].t);
+    buf.emplace_back(intervals[i].t);
   }
   return dp[intervals.size() - 1];
 }
