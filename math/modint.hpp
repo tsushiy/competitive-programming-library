@@ -6,37 +6,40 @@
  * @brief constexpr Modint data structure
  * @note support + - * / inv pow == != iostream
  */
-template <long long MOD = 1000000007>
+template <int MOD = 1000000007>
 struct Mint {
 private:
-  long long val;
+  unsigned int val;
 
 public:
-  constexpr Mint(const long long x = 0) noexcept
-      : val(x < 0      ? x % MOD + MOD
-            : x >= MOD ? x % MOD
-                       : x) {}
+  template <typename T>
+  constexpr Mint(T x) noexcept : val(x < 0      ? x % MOD + MOD
+                                     : x >= MOD ? x % MOD
+                                                : x) {}
+
+  constexpr Mint &operator+() noexcept { return *this; }
+  constexpr Mint &operator-() noexcept { return Mint(0) - *this; }
 
   constexpr Mint &operator+=(const Mint &rhs) noexcept {
     if ((val += rhs.val) >= MOD) val -= MOD;
     return *this;
   }
   constexpr Mint &operator-=(const Mint &rhs) noexcept {
-    if ((val -= rhs.val) < 0) val += MOD;
+    if ((val -= rhs.val) >= MOD) val += MOD;
     return *this;
   }
   constexpr Mint &operator*=(const Mint &rhs) noexcept {
-    val = val * rhs.val % MOD;
-    return *this;
-  }
-  constexpr Mint &operator/=(const Mint &rhs) noexcept {
-    val = val * rhs.inv().val % MOD;
+    val = static_cast<unsigned long long>(val) * rhs.val % MOD;
     return *this;
   }
 
   constexpr Mint operator+(const Mint &rhs) const noexcept { return Mint(*this) += rhs; }
   constexpr Mint operator-(const Mint &rhs) const noexcept { return Mint(*this) -= rhs; }
   constexpr Mint operator*(const Mint &rhs) const noexcept { return Mint(*this) *= rhs; }
+
+  // log(MOD)
+  constexpr Mint &operator/=(const Mint &rhs) noexcept { return *this *= rhs.inv(); }
+  // log(MOD)
   constexpr Mint operator/(const Mint &rhs) const noexcept { return Mint(*this) /= rhs; }
 
   // log(n)
@@ -56,11 +59,20 @@ public:
   constexpr bool operator==(const Mint &rhs) const noexcept { return val == rhs.val; }
   constexpr bool operator!=(const Mint &rhs) const noexcept { return val != rhs.val; }
 
+  friend constexpr Mint operator+(long long lhs, const Mint &rhs) { return Mint(lhs) += rhs; }
+  friend constexpr Mint operator-(long long lhs, const Mint &rhs) { return Mint(lhs) -= rhs; }
+  friend constexpr Mint operator*(long long lhs, const Mint &rhs) { return Mint(lhs) *= rhs; }
+  // log(MOD)
+  friend constexpr Mint operator/(long long lhs, const Mint &rhs) { return Mint(lhs) /= rhs; }
+
+  friend constexpr bool operator==(long long lhs, const Mint &rhs) { return lhs == rhs.val; }
+  friend constexpr bool operator!=(long long lhs, const Mint &rhs) { return lhs != rhs.val; }
+
   friend std::ostream &operator<<(std::ostream &os, const Mint<MOD> &x) { return os << x.val; }
   friend std::istream &operator>>(std::istream &is, Mint<MOD> &x) {
-    long long t;
-    is >> t;
-    x.val = t % MOD;
+    long long val_;
+    is >> val_;
+    x = val_;
     return is;
   }
 };
