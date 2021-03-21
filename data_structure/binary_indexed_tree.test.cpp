@@ -10,10 +10,11 @@ int main() {
   for (int i = 0; i < q; ++i) {
     int com, x, y;
     cin >> com >> x >> y;
+    --x;
     if (com == 0) {
-      bit.add(x - 1, y);
+      bit.add(x, y);
     } else {
-      cout << bit.sum(y) - bit.sum(x - 1) << endl;
+      cout << bit.sum(x, y) << endl;
     }
   }
 }
