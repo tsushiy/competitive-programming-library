@@ -9,14 +9,14 @@
 template <typename T>
 struct BIT {
 private:
-  int n;
+  int N;
   std::vector<T> node;
 
 public:
-  BIT(int n) : n(n), node(n, 0) {}
+  BIT(int N) : N(N), node(N, 0) {}
 
   void add(int k, T x) {
-    for (int i = k + 1; i <= n; i += i & -i) node[i - 1] += x;
+    for (int i = k + 1; i <= N; i += i & -i) node[i - 1] += x;
   }
 
   // [0, k)
